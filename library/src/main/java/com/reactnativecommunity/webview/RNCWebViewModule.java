@@ -40,7 +40,7 @@ import static android.app.Activity.RESULT_OK;
 
 @ReactModule(name = RNCWebViewModule.MODULE_NAME)
 public class RNCWebViewModule extends ReactContextBaseJavaModule implements ActivityEventListener {
-  public static final String MODULE_NAME = "RNCWebView";
+  public static final String MODULE_NAME = "react-native-webview";
   private static final int PICKER = 1;
   private static final int PICKER_LEGACY = 3;
   private static final int FILE_DOWNLOAD_PERMISSION_REQUEST = 1;
@@ -331,7 +331,7 @@ public class RNCWebViewModule extends ReactContextBaseJavaModule implements Acti
       Log.e("CREATE FILE", "Error occurred while creating the File", e);
       e.printStackTrace();
     }
-    
+
     return intent;
   }
 
