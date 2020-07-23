@@ -14,6 +14,8 @@ import android.net.http.SslError;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import android.text.TextUtils;
@@ -82,7 +84,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.annotation.Nullable;
 
 /**
  * Manages instances of {@link WebView}
@@ -137,7 +138,8 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
 
   protected RNCWebChromeClient mWebChromeClient = null;
   protected boolean mAllowsFullscreenVideo = false;
-  protected @Nullable String mUserAgent = null;
+  protected @Nullable
+  String mUserAgent = null;
   protected @Nullable String mUserAgentWithApplicationName = null;
 
   public RNCWebViewManager() {
@@ -169,8 +171,8 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
 
   @Override
   @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-  protected WebView createViewInstance(ThemedReactContext reactContext) {
-    RNCWebView webView = createRNCWebViewInstance(reactContext);
+  protected WebView createViewInstance(final ThemedReactContext reactContext) {
+    final RNCWebView webView = createRNCWebViewInstance(reactContext);
     setupWebChromeClient(reactContext, webView);
     reactContext.addLifecycleEventListener(webView);
     mWebViewConfig.configWebView(webView);
@@ -671,7 +673,7 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
 
   protected void setupWebChromeClient(ReactContext reactContext, WebView webView) {
     if (mAllowsFullscreenVideo) {
-      int initialRequestedOrientation = reactContext.getCurrentActivity().getRequestedOrientation();
+      final int initialRequestedOrientation = reactContext.getCurrentActivity().getRequestedOrientation();
       mWebChromeClient = new RNCWebChromeClient(reactContext, webView) {
         @Override
         public Bitmap getDefaultVideoPoster() {
@@ -1253,12 +1255,12 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
       }
     }
 
-    public void onMessage(String message) {
+    public void onMessage(final String message) {
       ReactContext reactContext = (ReactContext) this.getContext();
-      RNCWebView mContext = this;
+      final RNCWebView mContext = this;
 
       if (mRNCWebViewClient != null) {
-        WebView webView = this;
+        final WebView webView = this;
         webView.post(new Runnable() {
           @Override
           public void run() {
